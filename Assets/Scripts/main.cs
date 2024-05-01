@@ -1,18 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class main : MonoBehaviour
+namespace PVZA3
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Plant
     {
-        
+        public string name;
+        public int cost;
+        public float HP;
+        public float CD;
     }
-
-    // Update is called once per frame
-    void Update()
+    public class ATKPlant : Plant
     {
-        
+        public bool canSpeedUp = true;
+        public float ATK;
+        public float attackSpeed;
+    }
+    public class Zombie
+    {
+        public string name;
+        public float HP;
+        public float ATK;
+        public float moveSpeed;
+        public float attackSpeed;
+        public bool armorBool;
+        public float armorHP;
+        public float armorDR;
+        public bool armorCanPenetrate;
+        public float CSC;//综合强度系数
+    }
+    public class IAZ : Zombie
+    {
+        public int cost;
+        public float CD;
+    }
+    public class Buttle
+    {
+        public float damage;
+        public float speed;
+    }
+    public class PlantButtle : Buttle
+    {
+
+    }
+    public class ZombieButtle : Buttle
+    {
+
     }
 }
