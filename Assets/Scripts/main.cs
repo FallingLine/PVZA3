@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace PVZA3
 {
     public class Plant
@@ -10,7 +12,6 @@ namespace PVZA3
     public class ATKPlant : Plant
     {
         public bool canSpeedUp = true;
-        public float ATK;
         public float attackSpeed;
     }
     public class Zombie
@@ -38,7 +39,7 @@ namespace PVZA3
     }
     public class PlantButtle : Buttle
     {
-
+        
     }
     public class ZombieButtle : Buttle
     {

@@ -7,6 +7,8 @@ public class Pea : MonoBehaviour
 {
     public float damage;
     public float speed;
+    public GameObject prefabPeaButtle;
+
     private Vector3 direction = new Vector3(1, 0, 0);
 
     PlantButtle peaButtle = new PlantButtle();
@@ -20,6 +22,10 @@ public class Pea : MonoBehaviour
 
     void Update()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += direction * speed * Time.deltaTime * 10;
+        if(transform.position.x > 20)
+        {
+            Destroy(prefabPeaButtle);
+        }
     }
 }
