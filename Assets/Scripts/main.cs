@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PVZA3
@@ -8,6 +10,7 @@ namespace PVZA3
         public int cost;
         public float HP;
         public float CD;
+        public bool isTaco;
     }
     public class ATKPlant : Plant
     {

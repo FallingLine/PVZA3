@@ -9,26 +9,32 @@ public class DemoPlant : MonoBehaviour
     public int cost;
     public float HP;
     public float CD;
-    public float interval;
+    public float attackSpeed;
     public Transform mouth;
     public GameObject bullet;
 
     private float timer;
 
-    Plant demoPlant = new Plant();
+    ATKPlant demoPlant = new ATKPlant();
 
-    void Start()
+    void Awake()
     {
         demoPlant.name = plantName;
         demoPlant.cost = cost;
         demoPlant.HP = HP;
         demoPlant.CD = CD;
+        demoPlant.attackSpeed = attackSpeed;
     }
-    
+
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
-        if(timer >= interval)
+        if(timer >= demoPlant.attackSpeed)
         {
             timer = 0;
             Instantiate(bullet, mouth.position, Quaternion.identity);
