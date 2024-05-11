@@ -14,7 +14,7 @@ public class BrowncoatZombie : MonoBehaviour
     public float armorHP;
     public float armorDR;
     public bool armorCanPenetrate;
-    public float CSC;//综合强度系数
+    public float CSC;                    //综合强度系数
 
     public int cost;
     public float CD;

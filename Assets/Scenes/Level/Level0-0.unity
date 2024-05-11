@@ -5302,7 +5302,7 @@ MonoBehaviour:
   cost: 2
   HP: 0
   CD: 0
-  attackSpeed: 0
+  attackSpeed: 1
   mouth: {fileID: 1681620922}
   bullet: {fileID: 3909306328069174856, guid: 0267e976fe43e174aacfea27eb372e2f, type: 3}
 --- !u!212 &1536714718

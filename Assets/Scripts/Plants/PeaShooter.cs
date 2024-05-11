@@ -5,13 +5,13 @@ using PVZA3;
 
 public class PeaShooter : MonoBehaviour
 {
-    public string plantName;
-    public int cost;
-    public float HP;
-    public float CD;
-    public float attackSpeed;
+    public string plantName;    //植物名称
+    public int cost;            //费用  
+    public float HP;            //植物血量
+    public float CD;            //种植CD
+    public float attackSpeed;   //攻击速度
 
-    private float timer;
+    private float timer;        //未知
 
     ATKPlant peaShooter = new ATKPlant();
     void Awake()

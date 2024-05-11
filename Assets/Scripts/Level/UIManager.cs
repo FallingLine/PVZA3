@@ -31,4 +31,5 @@ public class UIManager : MonoBehaviour
     {
         sunNumText.text = GameManager.instance.sunNum.ToString();
     }
+    /********************更新向日葵在UI上的表示数量**********************/
 }
