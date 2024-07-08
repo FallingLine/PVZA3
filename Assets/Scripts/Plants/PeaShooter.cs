@@ -3,49 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using PVZA3;
 
-public class PeaShooter : MonoBehaviour
+public enum StateType
 {
-    public string plantName;    //植物名称
-    public int cost;            //费用  
-    public float HP;            //植物血量
-    public float CD;            //种植CD
-    public float attackSpeed;   //攻击速度
+    Peace,
+    Shoot,
+    PF,
+    Taco,
+    TacoPF,
+}
+public class PeaShooter : Plant
+{
+    private StateType cueState;
 
     private float timer;        //未知
-
-    ATKPlant peaShooter = new ATKPlant();
     void Awake()
     {
-        peaShooter.name = plantName;
-        peaShooter.cost = cost;
-        peaShooter.HP = HP;
-        peaShooter.CD = CD;
-        peaShooter.attackSpeed = attackSpeed;
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        cueState = StateType.Peace;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        switch (cueState)
+        {
+            case StateType.Peace:
+                OnPeace();
+                break;
+            case StateType.Shoot:
+                OnShoot();
+                break;
+            case StateType.PF:
+                OnPF();
+                break;
+            case StateType.Taco:
+                OnTaco();
+                break;
+            case StateType.TacoPF:
+                OnTacoPF();
+                break;
+            default:
+                break;
+        }
     }
 
-    public void Attack()
+    public void OnPeace()
     {
 
     }
 
-    public void pf()
+    public void OnShoot()
     {
 
     }
 
-    public void taco()
+    public void OnPF()
+    {
+
+    }
+    public void OnTaco()
+    {
+
+    }
+    public void OnTacoPF()
     {
 
     }

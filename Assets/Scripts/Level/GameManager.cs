@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int sunNum;
+    public SunNum sunNum;
     void Awake()
     {
         instance = this;
@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeSunNum(int changeNum)
     {
-        sunNum += changeNum;
-        if (sunNum <= 0) sunNum = 0;
+        sunNum.sunNum += changeNum;
+        if (sunNum.sunNum <= 0) sunNum.sunNum = 0;
         UIManager.instance.UpdateUI();
     }
 }
