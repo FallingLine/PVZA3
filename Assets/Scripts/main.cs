@@ -12,6 +12,7 @@ namespace PVZA3
         public float CD;
         public bool isTaco;
         public bool canSpeedUp = true;
+        public GameObject UIpreview;
     }
     public class Zombie : MonoBehaviour
     {
@@ -25,6 +26,7 @@ namespace PVZA3
         public float armorDR;
         public bool armorCanPenetrate;
         public float CSC;//综合强度系数
+        public GameObject UIpreview;
     }
     public class IAZ : Zombie
     {
