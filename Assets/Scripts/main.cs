@@ -13,6 +13,7 @@ namespace PVZA3
         public bool isTaco;
         public bool canSpeedUp = true;
         public GameObject UIpreview;
+        public Sprite cardPreview;
     }
     public class Zombie : MonoBehaviour
     {

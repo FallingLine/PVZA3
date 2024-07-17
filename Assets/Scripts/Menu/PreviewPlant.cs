@@ -8,6 +8,7 @@ using TMPro;
 
 public class PreviewPlant : MonoBehaviour
 {
+    [HideInInspector]
     public Plant plant;
     public GameObject preview;
     public TextMeshProUGUI needSun;
