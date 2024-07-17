@@ -743,9 +743,9 @@ RectTransform:
   m_Father: {fileID: 1086275537}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 932, y: -442}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -268, y: 98}
   m_SizeDelta: {x: 350, y: 135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221292193
@@ -6487,7 +6487,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5812416275153941297}
   - component: {fileID: 5812416275153941296}
-  - component: {fileID: 5812416275153941299}
   m_Layer: 5
   m_Name: CardHolder
   m_TagString: Untagged
@@ -6495,25 +6494,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5812416275153941299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812416275153941298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83131ab68f12dc84dbbacd58914a69dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plantCards:
-  - {fileID: 5812416276528781676}
-  - {fileID: 1453192334}
-  - {fileID: 1387854369}
-  - {fileID: 2033022659}
-  - {fileID: 1312178577}
-  - {fileID: 46654694}
 --- !u!1 &5812416275269782592
 GameObject:
   m_ObjectHideFlags: 0
@@ -6886,7 +6866,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c7ad1f6fc4ca843879028c54306ae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardHolder: {fileID: 5812416275153941299}
+  plantCards:
+  - {fileID: 5812416276528781676}
+  - {fileID: 1453192334}
+  - {fileID: 1387854369}
+  - {fileID: 2033022659}
+  - {fileID: 1312178577}
+  - {fileID: 46654694}
 --- !u!224 &5812416276104601396
 RectTransform:
   m_ObjectHideFlags: 0

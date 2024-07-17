@@ -7,6 +7,7 @@ using PVZA3;
 public class ChoosePlant : MonoBehaviour
 {
     public PreviewPlant previewPlant;
+
     // Start is called before the first frame update
     void Start()
     {

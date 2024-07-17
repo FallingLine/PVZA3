@@ -5,8 +5,8 @@ using PVZA3;
 
 public class CardBar : MonoBehaviour
 {
-    public CardHolder cardHolder;
     public static Plant[] plants = new Plant[6];
+    public PlantCard[] plantCards = new PlantCard[6];
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,7 @@ public class CardBar : MonoBehaviour
         }
         for (int i = 0; i <= 5; i++)
         {
-            cardHolder.plantCards[i].plant = plants[i];
+            plantCards[i].plant = plants[i];
         }
     }
 }
