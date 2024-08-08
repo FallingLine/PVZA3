@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace PVZA3
         public bool canSpeedUp = true;
         public GameObject UIpreview;
         public Sprite cardPreview;
+
+        [NonSerialized] public bool isChoosed = false;
     }
     public class Zombie : MonoBehaviour
     {
