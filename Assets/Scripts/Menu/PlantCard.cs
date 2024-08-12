@@ -3,25 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
+using System;
 
 public class PlantCard : MonoBehaviour
 {
-    public Plant plant;
-    public GameObject Card;
+    [NonSerialized] public Plant plant;
+    public GameObject card;
     public Image plantCard;
     public TextMeshProUGUI needSun;
     void Update()
     {
         if (plant != null)
         {
-            Card.SetActive(true);
+            card.SetActive(true);
             plantCard.sprite = plant.cardPreview;
             needSun.text = plant.cost.ToString();
         }
         else
         {
-            Card.SetActive(false);
+            card.SetActive(false);
         }
     }
 }

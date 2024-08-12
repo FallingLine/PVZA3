@@ -7,6 +7,7 @@ using PVZA3;
 public class ChoosePlant : MonoBehaviour
 {
     public CardSaver cardSaver;
+    [NonSerialized]public GameObject mCardSaver;
     public CardBar cardBar;
     public PreviewPlant previewPlant;
     public GameObject join;
@@ -15,7 +16,8 @@ public class ChoosePlant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mCardSaver = GameObject.Find("CardSaver");
+        cardSaver = mCardSaver.GetComponent<CardSaver>();
     }
 
     // Update is called once per frame
@@ -61,6 +63,10 @@ public class ChoosePlant : MonoBehaviour
                 previewPlant.plant.isChoosed = false;
                 break;
             }
+        }
+        for (int i = 0; i <= 5; i++)
+        {
+            cardBar.plantCards[i].plant = null;
         }
     }
 }

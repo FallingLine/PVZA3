@@ -4,20 +4,6 @@ using UnityEngine;
 using PVZA3;
 using System;
 
-public enum Scene
-{
-    YourHouseDay,
-    YourHouseNight,
-    CampGroundDay,
-    CampGroundNight,
-}
-public enum GameMod
-{
-    None,
-    ImZombie,
-    ZomBotany,
-    Endless,
-}
 [CreateAssetMenu(fileName ="LevelInfo",menuName = "EditorAsset/¹Ø¿¨ÐÅÏ¢")]
 public class LevelInfo : ScriptableObject
 {

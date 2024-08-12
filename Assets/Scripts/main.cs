@@ -1,10 +1,24 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PVZA3
 {
+    public enum Scene
+    {
+        YourHouseDay,
+        YourHouseNight,
+        CampGroundDay,
+        CampGroundNight,
+    }
+    public enum GameMod
+    {
+        None,
+        ImZombie,
+        ZomBotany,
+        Endless,
+    }
     public class Plant : MonoBehaviour
     {
         public string name;
@@ -54,5 +68,30 @@ namespace PVZA3
     {
         public float spawnSpeed;
         public int onceGet;
+    }
+    namespace UI
+    {
+        public class SceneLoader : MonoBehaviour
+        {
+            public Animator transtion;
+            public float waitForSeconds = 1f;
+            public void LoadScene(int sceneID,GameObject text)
+            {
+                StartCoroutine(LoadNextScene(sceneID, text));
+            }
+
+            IEnumerator LoadNextScene(int sceneID_2,GameObject text_2)
+            {
+                //Play animation
+                transtion.SetTrigger("Start");
+
+                //Wait
+                yield return new WaitForSeconds(waitForSeconds);
+
+                //Load Scene
+                text_2.SetActive(false);
+                SceneManager.LoadScene(sceneID_2);
+            }
+        }
     }
 }
