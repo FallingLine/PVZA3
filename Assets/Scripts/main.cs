@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace PVZA3
 {
@@ -45,6 +46,19 @@ namespace PVZA3
         public bool armorCanPenetrate;
         public float CSC;//综合强度系数
         public GameObject UIpreview;
+
+        private Vector3 direction = new Vector3(1, 0, 0);
+
+        public class SceneID
+        {
+            public int line;
+            private Vector3 direction = new Vector3(1, 0, 0);
+        }
+
+        public void ZombieGroundWalk(float speed) 
+        {
+            transform.position += direction * speed * Time.deltaTime;
+        }
     }
     public class IAZ : Zombie
     {
