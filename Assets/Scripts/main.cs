@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -32,6 +34,10 @@ namespace PVZA3
         public Sprite cardPreview;
 
         [NonSerialized] public bool isChoosed = false;
+        public class SceneInfo
+        {
+            public bool isPlant = false;
+        }
     }
     public class Zombie : MonoBehaviour
     {
@@ -46,18 +52,25 @@ namespace PVZA3
         public bool armorCanPenetrate;
         public float CSC;//综合强度系数
         public GameObject UIpreview;
+        public Animator zomAnim;
+        public AnimationClip zomWalk;
+        [NonSerialized] public float n = 0;
 
-        private Vector3 direction = new Vector3(1, 0, 0);
+        [NonSerialized] public Vector3 direction = new Vector3(1, 0, 0);
 
-        public class SceneID
+
+        public class m_SceneID
         {
             public int line;
-            private Vector3 direction = new Vector3(1, 0, 0);
         }
 
-        public void ZombieGroundWalk(float speed) 
+        public void WalkSpeedChange(float speed) 
         {
-            transform.position += direction * speed * Time.deltaTime;
+            AnimatorController controller = zomAnim.runtimeAnimatorController as AnimatorController;
+            AnimatorStateMachine stateMachine = controller.layers[0].stateMachine;
+            ChildAnimatorState[] states = stateMachine.states;
+            float magnification = states[0].state.speed;
+            n = speed * magnification;
         }
     }
     public class IAZ : Zombie

@@ -6,19 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: a08eee9788266504ba2aa757f98ec29a
-  - enabled: 1
-    path: Assets/Scenes/Level/LevelYourHouse.unity
-    guid: d998564344f106241874854bf128526b
-  - enabled: 1
-    path: Assets/Scenes/Level/LevelYourHouse_N.unity
-    guid: d39af7550b5c7064b91e91a0830432d9
-  - enabled: 1
-    path: Assets/Scenes/Level/LevelCampGround.unity
-    guid: 6fc7606f286713c45ac408b57505dd01
-  - enabled: 1
-    path: Assets/Scenes/Level/LevelCampGround_N.unity
-    guid: 19870aecd43d35c42921cadb88327aba
-  m_configObjects:
-    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 4d32e45ec9c7a984e859ab02e2a37670, type: 2}
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  m_configObjects: {}

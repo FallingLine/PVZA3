@@ -3,23 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Land
-  - Plant
-  - Zombie
-  - ZombieFlying
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Background
+  - 
   - Water
   - UI
-  - Plant
-  - PlantBullet
-  - Zombie
-  - ZombieFlying
-  - ZombieBullet
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -44,16 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Scene
-    uniqueID: 615671983
-    locked: 0
-  - name: Shadow
-    uniqueID: 3236690785
-    locked: 0
-  - name: Plant
-    uniqueID: 3177924531
-    locked: 0
-  - name: Zombie
-    uniqueID: 2808104695
     locked: 0

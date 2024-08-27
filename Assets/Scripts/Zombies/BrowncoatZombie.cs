@@ -12,7 +12,7 @@ public class BrowncoatZombie : Zombie
     {
 
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -21,6 +21,6 @@ public class BrowncoatZombie : Zombie
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position -= direction * n * Time.deltaTime;
     }
 }

@@ -65034,9 +65034,135 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: ZombieGroundWalk
+    functionName: WalkSpeedChange
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 1
+    floatParameter: 0.1
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1666666
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.0672
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.3333333
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.2612
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.5
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1628
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.9166667
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.222
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.25
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.3516
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.5
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.282
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.5833333
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.2404
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.6666667
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1252
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.75
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1776
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.9166667
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.2088
+    intParameter: 0
+    messageOptions: 0
+  - time: 4
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.0576
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.1666665
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.0312
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.4166665
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.282
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.5833335
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1568
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.75
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.0836
+    intParameter: 0
+    messageOptions: 0
+  - time: 5
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.1096
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.1666665
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.068
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.8333335
+    functionName: WalkSpeedChange
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.179
     intParameter: 0
     messageOptions: 0
