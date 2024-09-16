@@ -8,6 +8,11 @@ using UnityEngine.UIElements;
 
 namespace PVZA3
 {
+    public enum Faction
+    {
+        Own,
+        Enemy,
+    }
     public enum Scene
     {
         YourHouseDay,
@@ -22,13 +27,17 @@ namespace PVZA3
         ZomBotany,
         Endless,
     }
-    public class Plant : MonoBehaviour
+    public class PVZObject : MonoBehaviour
     {
-        public string name;
+        public float hP;
+        public Faction faction;
+        public bool isHypnotic;
+    }
+    public class Plant : PVZObject
+    {
+        public string pvzName;
         public int cost;
-        public float HP;
         public float CD;
-        public bool isTaco;
         public bool canSpeedUp = true;
         public GameObject UIpreview;
         public Sprite cardPreview;
@@ -37,19 +46,21 @@ namespace PVZA3
         public class SceneInfo
         {
             public bool isPlant = false;
+            public bool isTaco = false;
         }
     }
-    public class Zombie : MonoBehaviour
+    public class armor : PVZObject
     {
-        public string name;
-        public float HP;
+        public float dR;
+        public bool canPenetrate = false;//是否能被贯穿（默认否）
+    }
+    public class Zombie : PVZObject
+    {
+        public string pvzName;
         public float ATK;
-        public float moveSpeed;
-        public float attackSpeed;
-        public bool armorBool;
-        public float armorHP;
-        public float armorDR;
-        public bool armorCanPenetrate;
+        public float moveSpeed = 1;
+        public float attackSpeed = 1;
+        public List<armor> armors = new List<armor>();
         public float CSC;//综合强度系数
         public GameObject UIpreview;
         public Animator zomAnim;
@@ -66,11 +77,20 @@ namespace PVZA3
 
         public void WalkSpeedChange(float speed) 
         {
+            Animation anim = GetComponent<Animation>();
+            foreach (AnimationState state in anim)
+            {
+                state.speed = 0.5F;
+            }
             AnimatorController controller = zomAnim.runtimeAnimatorController as AnimatorController;
             AnimatorStateMachine stateMachine = controller.layers[0].stateMachine;
             ChildAnimatorState[] states = stateMachine.states;
             float magnification = states[0].state.speed;
             n = speed * magnification;
+        }
+        void Update()
+        {
+            transform.position -= direction * n * Time.deltaTime;
         }
     }
     public class IAZ : Zombie

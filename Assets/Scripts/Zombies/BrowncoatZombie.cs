@@ -19,8 +19,5 @@ public class BrowncoatZombie : Zombie
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        transform.position -= direction * n * Time.deltaTime;
-    }
+    
 }
