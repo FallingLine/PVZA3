@@ -58,14 +58,21 @@ namespace PVZA3
     {
         public string pvzName;
         public float ATK;
-        public float moveSpeed = 1;
-        public float attackSpeed = 1;
+        public float moveSpeed = 1f;
+        public float attackSpeed = 1f;
         public List<armor> armors = new List<armor>();
         public float CSC;//综合强度系数
         public GameObject UIpreview;
         public Animator zomAnim;
         public AnimationClip zomWalk;
+
+        public GameObject fullBloodSign;
+        public GameObject halfBloodSign;
+
         [NonSerialized] public float n = 0;
+        [NonSerialized] public float m = 0;
+
+        [NonSerialized] public float fullHP;
 
         [NonSerialized] public Vector3 direction = new Vector3(1, 0, 0);
 
@@ -75,22 +82,42 @@ namespace PVZA3
             public int line;
         }
 
-        public void WalkSpeedChange(float speed) 
+        public void Awake()
         {
-            Animation anim = GetComponent<Animation>();
-            foreach (AnimationState state in anim)
-            {
-                state.speed = 0.5F;
-            }
-            AnimatorController controller = zomAnim.runtimeAnimatorController as AnimatorController;
-            AnimatorStateMachine stateMachine = controller.layers[0].stateMachine;
-            ChildAnimatorState[] states = stateMachine.states;
-            float magnification = states[0].state.speed;
-            n = speed * magnification;
+            fullBloodSign.SetActive(true);
+            halfBloodSign.SetActive(false);
+            fullHP = hP;
+            zomAnim.speed = moveSpeed;
         }
         void Update()
         {
             transform.position -= direction * n * Time.deltaTime;
+            if (hP <= fullHP / 2)
+            {
+                HalfBloodAction();
+            }
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+            var tag = collision.collider.tag;
+            if (tag == "Bullet" && bullet.faction != faction)
+            {
+                hP -= bullet.damage;
+            }
+        }
+
+        public void WalkSpeedChange(float speed)
+        {
+
+            zomAnim.speed = moveSpeed;
+            n = speed * moveSpeed;
+        }
+        public void HalfBloodAction()
+        {
+            fullBloodSign.SetActive(false);
+            halfBloodSign.SetActive(true);
         }
     }
     public class IAZ : Zombie
@@ -100,22 +127,16 @@ namespace PVZA3
     }
     public class Bullet : MonoBehaviour
     {
+        public Faction faction;
         public float damage;
         public float speed;
-    }
-    public class PlantBullet : Bullet
-    {
-        
-    }
-    public class Zombiebullet : Bullet
-    {
-
     }
     public class SunFlower : MonoBehaviour
     {
         public float spawnSpeed;
         public int onceGet;
     }
+
     namespace UI
     {
         public class SceneLoader : MonoBehaviour

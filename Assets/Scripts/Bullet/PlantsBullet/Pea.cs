@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PVZA3;
 //该脚本用于检测豌豆子弹的消失条件，以及豌豆子弹的行动轨迹
-public class Pea : PlantBullet
+public class Pea : Bullet
 {
     private Vector3 direction = new Vector3(1, 0, 0);
     

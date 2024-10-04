@@ -10,8 +10,8 @@ public class LevelStart : SceneLoader
 {
     public CardSaver cardSaver;
     [NonSerialized] public GameObject mCardSaver;
-    public GameObject dark;
-    public GameObject light;
+    public GameObject buttonDark;
+    public GameObject buttonLight;
     public GameObject text;
 
     [NonSerialized] public int sceneID;
@@ -31,13 +31,13 @@ public class LevelStart : SceneLoader
     {
         if(cardSaver.plants.Length >= 3)
         {
-            dark.SetActive(false);
-            light.SetActive(true);
+            buttonDark.SetActive(false);
+            buttonLight.SetActive(true);
         }
         else
         {
-            dark.SetActive(true);
-            light.SetActive(false);
+            buttonDark.SetActive(true);
+            buttonLight.SetActive(false);
         }
         sceneID = (int)scene + 1;
     }

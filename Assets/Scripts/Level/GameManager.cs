@@ -6,10 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public SunNum sunNum;
+    public int zonNum;
+    public int timer;
+    public bool isHard;
+    private bool gameStart = false;
+    public LevelInfo levelInfo;
     void Awake()
     {
         instance = this;
         UIManager.instance.InitUI();
+        levelInfo = FindObjectOfType<LevelInfo>();
     }
     void Start()
     {

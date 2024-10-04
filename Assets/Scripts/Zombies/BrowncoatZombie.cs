@@ -7,16 +7,11 @@ using PVZA3.Z_FSM;
 public class BrowncoatZombie : Zombie
 {
     
-
-    void Awake()
-    {
-
-    }
-
     void Start()
     {
         
     }
+    
 
     // Update is called once per frame
     
