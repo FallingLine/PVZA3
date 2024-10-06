@@ -47,6 +47,7 @@ namespace PVZA3
         {
             public bool isPlant = false;
             public bool isTaco = false;
+            public Vector2 coordinate;
         }
     }
     public class armor : PVZObject
@@ -74,7 +75,6 @@ namespace PVZA3
         [NonSerialized] public float m = 0;
 
         [NonSerialized] public Plant plant;
-        [NonSerialized] public Vector3 direction = new Vector3(1, 0, 0);
 
         [Serializable]
         public class m_SceneID
@@ -91,7 +91,7 @@ namespace PVZA3
         }
         void Update()
         {
-            transform.position -= direction * n * Time.deltaTime;
+            transform.position -= Vector3.right * n * Time.deltaTime;
             if (hP <= fullHP / 2)
             {
                 HalfBloodAction();

@@ -64830,6 +64830,6 @@ AnimationClip:
     functionName: WalkSpeedChange
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.179
+    floatParameter: 0.005
     intParameter: 0
     messageOptions: 0

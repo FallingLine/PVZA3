@@ -9,7 +9,7 @@ using PVZA3.P_FSM;
 public class PlantsBlackboard : Blackboard
 {
     public Animator plantAnim;
-    public Collider2D detection;
+    [NonSerialized] public bool detection;
 }
 
 public class AI_IdleState : IState
@@ -31,12 +31,7 @@ public class AI_IdleState : IState
     }
     public void OnUpdate()
     {
-        var tag = blackboard.detection.tag;
-        Debug.Log(tag);
-        if (tag == "Zombie")
-        {
-            this.fsm.SwitchState(StateType.Attack);
-        }
+        throw new NotImplementedException();
     }
 }
 
@@ -68,7 +63,8 @@ public class PeaShooter : Plant
     public Animator plantAnim;
     private PlantFSM fsm;
     public PlantsBlackboard blackboard;
-
+    private float line;
+    public GameObject bottomLine;
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +73,9 @@ public class PeaShooter : Plant
         fsm.AddState(StateType.Idle, new AI_IdleState(fsm));
         fsm.AddState(StateType.Attack, new AI_AttackState(fsm));
         fsm.SwitchState(StateType.Idle);
+
+        bottomLine = GameObject.Find("BottomLine");
+        line = (bottomLine.transform.position.x - transform.position.x) * 2f;
     }
 
     // Update is called once per frame
@@ -84,6 +83,8 @@ public class PeaShooter : Plant
     {
         fsm.OnCheck();
         fsm.OnUpdate();
+        blackboard.detection = Physics2D.Raycast(transform.position, Vector3.right, line, 7);
+        Debug.DrawLine(transform.position, new Vector3(transform.position.x + line, transform.position.y, transform.position.z), Color.red);
     }
 
     private void FixedUpdate()
