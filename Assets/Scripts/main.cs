@@ -29,9 +29,9 @@ namespace PVZA3
     }
     public class PVZObject : MonoBehaviour
     {
-        public float hP;
         public Faction faction;
-        public bool isHypnotic;
+        [NonSerialized] public float hP;
+        [NonSerialized] public bool isHypnotic;
     }
     public class Plant : PVZObject
     {
@@ -56,6 +56,7 @@ namespace PVZA3
     }
     public class Zombie : PVZObject
     {
+        public float fullHP;
         public string pvzName;
         public float ATK;
         public float moveSpeed = 1f;
@@ -72,11 +73,10 @@ namespace PVZA3
         [NonSerialized] public float n = 0;
         [NonSerialized] public float m = 0;
 
-        [NonSerialized] public float fullHP;
-
+        [NonSerialized] public Plant plant;
         [NonSerialized] public Vector3 direction = new Vector3(1, 0, 0);
 
-
+        [Serializable]
         public class m_SceneID
         {
             public int line;
@@ -86,7 +86,7 @@ namespace PVZA3
         {
             fullBloodSign.SetActive(true);
             halfBloodSign.SetActive(false);
-            fullHP = hP;
+            hP = fullHP;
             zomAnim.speed = moveSpeed;
         }
         void Update()
@@ -97,22 +97,41 @@ namespace PVZA3
                 HalfBloodAction();
             }
         }
-
-        void OnCollisionEnter(Collision collision)
+        
+        void OnCollisionEnter2D(Collision2D collision)
         {
-            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
             var tag = collision.collider.tag;
-            if (tag == "Bullet" && bullet.faction != faction)
+            if (tag == "Bullet")
             {
-                hP -= bullet.damage;
+                Bullet bullet = collision.gameObject.GetComponent<Bullet>();
+                if (bullet.faction != faction)
+                {
+                    hP -= bullet.damage;
+                }
+            }
+        }
+        void OnCollisionStay2D(Collision2D collision)
+        {
+            var tag = collision.collider.tag;
+            if (tag == "Plant")
+            {
+                plant = collision.gameObject.GetComponent<Plant>();
             }
         }
 
         public void WalkSpeedChange(float speed)
         {
-
             zomAnim.speed = moveSpeed;
             n = speed * moveSpeed;
+        }
+        public void StopMove()
+        {
+            n = 0;
+            zomAnim.speed = attackSpeed;
+        }
+        public void Attack()
+        {
+            plant.hP -= ATK;
         }
         public void HalfBloodAction()
         {
@@ -135,6 +154,81 @@ namespace PVZA3
     {
         public float spawnSpeed;
         public int onceGet;
+    }
+
+    namespace P_FSM
+    {
+        public enum StateType
+        {
+            Idle,
+            Attack,
+            PF,
+            Taco,
+            TacoATK,
+            TacoPF,
+        }
+        public interface IState
+        {
+            void OnEnter();
+            void OnExit();
+            void OnUpdate();
+            //void OnCleck();
+            //void OnFixUpdate();
+        }
+        [Serializable]
+        public class Blackboard
+        {
+            //此处存储共享数据，或者向外展示的数据，可配置数据
+        }
+        public class PlantFSM
+        {
+            public IState curState;
+            public Dictionary<StateType, IState> states;
+            public Blackboard blackboard;
+
+            public PlantFSM(Blackboard blackboard)
+            {
+                this.states = new Dictionary<StateType, IState>();
+                this.blackboard = blackboard;
+            }
+
+            public void AddState(StateType stateType, IState state)
+            {
+                if (states.ContainsKey(stateType))
+                {
+                    Debug.Log("[AddState] >>>>>>>>>>> Plant has contain key : " + stateType);
+                    return;
+                }
+                states.Add(stateType, state);
+            }
+
+            public void SwitchState(StateType stateType)
+            {
+                if (!states.ContainsKey(stateType))
+                {
+                    Debug.Log("[AddState] >>>>>>>>>>> Not contain key : " + stateType);
+                    return;
+                }
+                if (curState != null)
+                {
+                    curState.OnExit();
+                }
+                curState = states[stateType];
+                curState.OnEnter();
+            }
+            public void OnUpdate()
+            {
+                //curState.OnFixUpdate():
+            }
+            public void OnCheck()
+            {
+                //curState.OnCleck();
+            }
+            public void OnFixUpdate()
+            {
+                //curState.OnFixUpdate();
+            }
+        }
     }
 
     namespace UI
