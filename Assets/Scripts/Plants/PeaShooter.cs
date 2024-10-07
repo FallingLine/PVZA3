@@ -63,7 +63,7 @@ public class PeaShooter : Plant
     public Animator plantAnim;
     private PlantFSM fsm;
     public PlantsBlackboard blackboard;
-    private float line;
+    [NonSerialized] public float line;
     public GameObject bottomLine;
 
     // Start is called before the first frame update
