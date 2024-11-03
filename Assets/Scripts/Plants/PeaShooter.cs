@@ -3,91 +3,106 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PVZA3;
-using PVZA3.P_FSM;
+using PVZA3.FSM;
 
 [Serializable]
-public class PlantsBlackboard : Blackboard
+public class PeaShooterBlackboard : Blackboard
 {
+    public float waitTime;
     public Animator plantAnim;
-    [NonSerialized] public bool detection;
+    public PlantDetection plantDetection;
 }
 
-public class AI_IdleState : IState
+public class PeaShooter_IdleState : IState
 {
-    private PlantFSM fsm;
-    private PlantsBlackboard blackboard;
-    public AI_IdleState(PlantFSM fsm)
+    private float timer;
+
+    private FSM fsm;
+    private PeaShooterBlackboard blackboard;
+    public PeaShooter_IdleState(FSM fsm)
     {
         this.fsm = fsm;
-        this.blackboard = fsm.blackboard as PlantsBlackboard;
+        this.blackboard = fsm.blackboard as PeaShooterBlackboard;
     }
     public void OnEnter()
     {
-        blackboard.plantAnim.Play("idle");
+        //throw new NotImplementedException();
     }
     public void OnExit()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
     public void OnUpdate()
     {
-        throw new NotImplementedException();
+        if (blackboard.plantDetection.haveZombie == true)
+        {
+            fsm.SwitchState(StateType.b);
+            Debug.Log("There have Zombies");
+        }
     }
 }
 
-public class AI_AttackState : IState
+public class PeaShooter_AttackState : IState
 {
-    private PlantFSM fsm;
-    private PlantsBlackboard blackboard;
-    public AI_AttackState(PlantFSM fsm)
+    private float timer;
+    private FSM fsm;
+    private PeaShooterBlackboard blackboard;
+    public PeaShooter_AttackState(FSM fsm)
     {
         this.fsm = fsm;
-        this.blackboard = fsm.blackboard as PlantsBlackboard;
+        this.blackboard = fsm.blackboard as PeaShooterBlackboard;
     }
     public void OnEnter()
     {
-        blackboard.plantAnim.Play("attack");
+        timer = 0;
+        blackboard.plantAnim.SetTrigger("HaveZombie");
     }
     public void OnExit()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
     public void OnUpdate()
     {
-        throw new NotImplementedException();
+        timer += Time.deltaTime;
+        AnimationClip animationClip = blackboard.plantAnim.runtimeAnimatorController.animationClips[1];
+        float length = animationClip.length;
+        if (timer >= length/2+blackboard.waitTime)
+        {
+            timer = 0;
+            blackboard.plantAnim.SetTrigger("HaveZombie");
+        }
+        if (blackboard.plantDetection.haveZombie == false)
+        {
+            fsm.SwitchState(StateType.a);
+            Debug.Log("Zombies Dead");
+        }
     }
 }
 
 public class PeaShooter : Plant
 {
     public Animator plantAnim;
-    private PlantFSM fsm;
-    public PlantsBlackboard blackboard;
-    [NonSerialized] public float line;
-    public GameObject bottomLine;
+
+    private FSM fsm;
+    public PeaShooterBlackboard blackboard;
 
     // Start is called before the first frame update
     void Start()
     {
-        fsm = new PlantFSM(blackboard);
-        fsm.AddState(StateType.Idle, new AI_IdleState(fsm));
-        fsm.AddState(StateType.Attack, new AI_AttackState(fsm));
-        fsm.SwitchState(StateType.Idle);
-
-        bottomLine = GameObject.Find("BottomLine");
-        line = (bottomLine.transform.position.x - transform.position.x) * 2f;
+        fsm = new FSM(blackboard);
+        fsm.AddState(StateType.a, new PeaShooter_IdleState(fsm));
+        fsm.AddState(StateType.b, new PeaShooter_AttackState(fsm));
+        fsm.SwitchState(StateType.a);
+        hP = fullHP;
     }
 
     // Update is called once per frame
     void Update()
     {
-        fsm.OnCheck();
+        //fsm.OnCheck();
         fsm.OnUpdate();
-        blackboard.detection = Physics2D.Raycast(transform.position, Vector3.right, line, 7);
-        Debug.DrawLine(transform.position, new Vector3(transform.position.x + line, transform.position.y, transform.position.z), Color.red);
     }
-
-    private void FixedUpdate()
+    void FixUpdate()
     {
         fsm.OnFixUpdate();
     }

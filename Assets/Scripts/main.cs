@@ -5,6 +5,8 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.Pool;
+using PVZA3.FSM;
 
 namespace PVZA3
 {
@@ -35,6 +37,7 @@ namespace PVZA3
     }
     public class Plant : PVZObject
     {
+        public float fullHP;
         public string pvzName;
         public int cost;
         public float CD;
@@ -59,84 +62,66 @@ namespace PVZA3
     {
         public float fullHP;
         public string pvzName;
-        public float ATK;
-        public float moveSpeed = 1f;
-        public float attackSpeed = 1f;
+        public float aTK;
         public List<armor> armors = new List<armor>();
         public float CSC;//综合强度系数
         public GameObject UIpreview;
-        public Animator zomAnim;
-        public AnimationClip zomWalk;
 
+        public List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+        
+
+        public bool haveHalfAction = true;
         public GameObject fullBloodSign;
         public GameObject halfBloodSign;
-
-        [NonSerialized] public float n = 0;
-        [NonSerialized] public float m = 0;
+        public bool haveHalfAction_AT = false;
+        public GameObject halfBloodSign_AT;
 
         [NonSerialized] public Plant plant;
+        public float brightness;
 
         [Serializable]
         public class m_SceneID
         {
             public int line;
         }
-
         public void Awake()
         {
-            fullBloodSign.SetActive(true);
-            halfBloodSign.SetActive(false);
-            hP = fullHP;
-            zomAnim.speed = moveSpeed;
-        }
-        void Update()
-        {
-            transform.position -= Vector3.right * n * Time.deltaTime;
-            if (hP <= fullHP / 2)
+            if (haveHalfAction == true)
             {
-                HalfBloodAction();
-            }
-        }
-        
-        void OnCollisionEnter2D(Collision2D collision)
-        {
-            var tag = collision.collider.tag;
-            if (tag == "Bullet")
-            {
-                Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-                if (bullet.faction != faction)
+                fullBloodSign.SetActive(true);
+                halfBloodSign.SetActive(false);
+                if (haveHalfAction_AT == true)
                 {
-                    hP -= bullet.damage;
+                    halfBloodSign_AT.SetActive(false);
+                }
+            }
+            hP = fullHP;
+        }
+
+        public void HalfBloodAction()
+        {
+            if (haveHalfAction == true)
+            {
+                fullBloodSign.SetActive(false);
+                halfBloodSign.SetActive(true);
+                if (haveHalfAction_AT == true)
+                {
+                    halfBloodSign_AT.SetActive(false);
                 }
             }
         }
-        void OnCollisionStay2D(Collision2D collision)
-        {
-            var tag = collision.collider.tag;
-            if (tag == "Plant")
-            {
-                plant = collision.gameObject.GetComponent<Plant>();
-            }
-        }
 
-        public void WalkSpeedChange(float speed)
+        public void HalfBloodAction_AT()
         {
-            zomAnim.speed = moveSpeed;
-            n = speed * moveSpeed;
-        }
-        public void StopMove()
-        {
-            n = 0;
-            zomAnim.speed = attackSpeed;
-        }
-        public void Attack()
-        {
-            plant.hP -= ATK;
-        }
-        public void HalfBloodAction()
-        {
-            fullBloodSign.SetActive(false);
-            halfBloodSign.SetActive(true);
+            if (haveHalfAction == true)
+            {
+                fullBloodSign.SetActive(false);
+                halfBloodSign.SetActive(false);
+                if (haveHalfAction_AT == true)
+                {
+                    halfBloodSign_AT.SetActive(true);
+                }
+            }
         }
     }
     public class IAZ : Zombie
@@ -149,6 +134,8 @@ namespace PVZA3
         public Faction faction;
         public float damage;
         public float speed;
+
+        public ObjectPool<GameObject> pool;
     }
     public class SunFlower : MonoBehaviour
     {
@@ -156,16 +143,16 @@ namespace PVZA3
         public int onceGet;
     }
 
-    namespace P_FSM
+    namespace FSM
     {
         public enum StateType
         {
-            Idle,
-            Attack,
-            PF,
-            Taco,
-            TacoATK,
-            TacoPF,
+            a,
+            b,
+            c,
+            d,
+            e,
+            f,
         }
         public interface IState
         {
@@ -180,13 +167,13 @@ namespace PVZA3
         {
             //此处存储共享数据，或者向外展示的数据，可配置数据
         }
-        public class PlantFSM
+        public class FSM
         {
             public IState curState;
             public Dictionary<StateType, IState> states;
             public Blackboard blackboard;
 
-            public PlantFSM(Blackboard blackboard)
+            public FSM(Blackboard blackboard)
             {
                 this.states = new Dictionary<StateType, IState>();
                 this.blackboard = blackboard;
@@ -218,11 +205,11 @@ namespace PVZA3
             }
             public void OnUpdate()
             {
-                //curState.OnFixUpdate():
+                curState.OnUpdate();
             }
             public void OnCheck()
             {
-                //curState.OnCleck();
+                //curState.OnCheck();
             }
             public void OnFixUpdate()
             {

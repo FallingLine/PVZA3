@@ -2,7 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using PVZA3;
+
+
 //该脚本用于检测豌豆子弹的消失条件，以及豌豆子弹的行动轨迹
 public class Pea : Bullet
 {
@@ -10,24 +13,27 @@ public class Pea : Bullet
     
     void Start()
     {
-    }
 
+    }
 
     void Update()
     {
         transform.position += direction * speed * Time.deltaTime * 10;
         if(transform.position.x > 20)
         {
-            GameObject.Destroy(gameObject);
+            pool.Release(gameObject);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.tag == "Zombie")
+        var tag = collision.collider.tag;
+        if (tag == "Zombie")
         {
-            GameObject.Destroy(gameObject);
-            
+            Zombie zombie = collision.gameObject.GetComponent<Zombie>();
+            zombie.hP -= damage;
+            zombie.brightness = 1.25f;
+            pool.Release(gameObject);
         }
     }
 }

@@ -1,3 +1,4 @@
+using PVZA3;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,10 @@ public class GameManager : MonoBehaviour
     public int zonNum;
     public int timer;
     public bool isHard;
-    private bool gameStart = false;
+    public bool gameStart = false;
     public LevelInfo levelInfo;
+
+    
     void Awake()
     {
         instance = this;
