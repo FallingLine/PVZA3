@@ -25,7 +25,7 @@ public class Cirno_MoveState : IState
     }
     public void OnEnter()
     {
-        //throw new NotImplementedException();
+        blackboard.zomAnim.SetBool("HavePlant", false);
     }
     public void OnExit()
     {
@@ -55,7 +55,7 @@ public class Cirno_AttackState : IState
     }
     public void OnEnter()
     {
-
+        blackboard.zomAnim.SetBool("HavePlant", true);
     }
     public void OnExit()
     {
@@ -63,7 +63,6 @@ public class Cirno_AttackState : IState
     }
     public void OnUpdate()
     {
-        blackboard.zomAnim.SetTrigger("HavePlant");
         if (blackboard.zombie.plant == null)
         {
             fsm.SwitchState(StateType.a);
@@ -98,7 +97,7 @@ public class Cirno_DieState : IState
         timer += Time.deltaTime;
         if (timer >= blackboard.disappearTime)
         {
-            GameObject.Destroy(blackboard.zombie);
+            GameObject.Destroy(blackboard.zombie.self);
         }
     }
 }
@@ -116,7 +115,7 @@ public class Cirno : Zombie
         fsm.AddState(StateType.b, new Cirno_AttackState(fsm));
         fsm.AddState(StateType.c, new Cirno_DieState(fsm));
         fsm.SwitchState(StateType.a);
-        brightness = 1f;
+        brightness = 0f;
     }
 
     // Update is called once per frame
@@ -130,9 +129,9 @@ public class Cirno : Zombie
             BoxCollider2D boxCollider2D = GetComponent<BoxCollider2D>();
             boxCollider2D.enabled = false;
         }
-        if (brightness <= 1f)
+        if (brightness <= 0f)
         {
-            brightness = 1f;
+            brightness = 0f;
         }
         else
         {
@@ -146,14 +145,6 @@ public class Cirno : Zombie
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var tag = collision.collider.tag;
-        if (tag == "Bullet")
-        {
-            Bullet bullet = collision.gameObject.GetComponent<Bullet>();
-            if (bullet.faction != faction)
-            {
-                hP -= bullet.damage;
-            }
-        }
         if (tag == "Plant")
         {
             Plant tempPlant = collision.gameObject.GetComponent<Plant>();

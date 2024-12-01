@@ -44,6 +44,7 @@ namespace PVZA3
         public bool canSpeedUp = true;
         public GameObject UIpreview;
         public Sprite cardPreview;
+        public GameObject self;
 
         [NonSerialized] public bool isChoosed = false;
         public class SceneInfo
@@ -60,24 +61,26 @@ namespace PVZA3
     }
     public class Zombie : PVZObject
     {
+        public int id;
         public float fullHP;
         public string pvzName;
         public float aTK;
         public List<armor> armors = new List<armor>();
-        public float CSC;//综合强度系数
+        public float cSC;//综合强度系数
         public GameObject UIpreview;
 
         public List<SpriteRenderer> renderers = new List<SpriteRenderer>();
         
-
         public bool haveHalfAction = true;
         public GameObject fullBloodSign;
         public GameObject halfBloodSign;
         public bool haveHalfAction_AT = false;
         public GameObject halfBloodSign_AT;
 
+        public GameObject self;
+
         [NonSerialized] public Plant plant;
-        public float brightness;
+        [NonSerialized] public float brightness;
 
         [Serializable]
         public class m_SceneID

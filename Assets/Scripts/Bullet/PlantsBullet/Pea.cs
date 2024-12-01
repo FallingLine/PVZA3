@@ -32,7 +32,7 @@ public class Pea : Bullet
         {
             Zombie zombie = collision.gameObject.GetComponent<Zombie>();
             zombie.hP -= damage;
-            zombie.brightness = 1.25f;
+            zombie.brightness = 0.25f;
             pool.Release(gameObject);
         }
     }

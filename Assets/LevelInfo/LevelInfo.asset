@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7fcce9ebba2794487170c408fb020b, type: 3}
+  m_Name: LevelInfo
+  m_EditorClassIdentifier: 
+  levelName: test
+  isBoss: 0
+  isHard: 1
+  wave: 3
+  waveLevel:
+  - 1
+  - 2
+  - 4
+  importantWave: 03000000
+  wave_2: 4
+  waveLevel_2:
+  - 8
+  - 12
+  - 15
+  - 25
+  importantWave_2: 04000000
+  zombies:
+  - {fileID: 8253751839559905237, guid: 9193654138012b24a8402d0a677650bb, type: 3}
+  scene: 0
+  gameMod: 0
+  willWave_1: []
+  willWave_2: []
+  water: []
+  earth: []

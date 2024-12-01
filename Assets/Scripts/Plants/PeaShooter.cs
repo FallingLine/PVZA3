@@ -81,7 +81,7 @@ public class PeaShooter_AttackState : IState
 
 public class PeaShooter : Plant
 {
-    public Animator plantAnim;
+    public GameObject deadAction;
 
     private FSM fsm;
     public PeaShooterBlackboard blackboard;
@@ -101,6 +101,14 @@ public class PeaShooter : Plant
     {
         //fsm.OnCheck();
         fsm.OnUpdate();
+        if (hP <= 0)
+        {
+            GameObject.Destroy(self);
+            if (deadAction != null)
+            {
+                Instantiate(deadAction, this.transform.position, Quaternion.identity);
+            }
+        }
     }
     void FixUpdate()
     {

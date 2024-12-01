@@ -17,7 +17,7 @@ TagManager:
   - UI
   - 
   - Zombie
-  - 
+  - Plant
   - 
   - 
   - 
@@ -42,6 +42,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1092231815
+    locked: 0
+  - name: Plant
+    uniqueID: 1146107725
+    locked: 0
+  - name: Zombie
+    uniqueID: 2667935707
+    locked: 0
+  - name: text
+    uniqueID: 564600077
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

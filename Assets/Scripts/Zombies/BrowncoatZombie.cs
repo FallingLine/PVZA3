@@ -100,7 +100,7 @@ public class BrowncoatZombie : Zombie
         fsm.AddState(StateType.b, new NormalZombie_AttackState(fsm));
         fsm.AddState(StateType.c, new NormalZombie_DieState(fsm));
         fsm.SwitchState(StateType.a);
-        brightness = 1f;
+        brightness = 0f;
     }
     void Update()
     {
@@ -111,9 +111,9 @@ public class BrowncoatZombie : Zombie
         {
             HalfBloodAction();
         }
-        if (brightness <= 1f)
+        if (brightness <= 0f)
         {
-            brightness = 1f;
+            brightness = 0f;
         }
         else
         {
